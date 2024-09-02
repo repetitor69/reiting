@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг учеников</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .center {
+            text-align: center;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Рейтинг учеников</h1>
+
+<table id="ratingTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Оценка</th>
+            <th>Рейтинг</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>001</td>
+            <td>Иванов И.</td>
+            <td class="score">85</td>
+            <td class="rank"></td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>Петрова А.</td>
+            <td class="score">92</td>
+            <td class="rank"></td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>Сидоров С.</td>
+            <td class="score">78</td>
+            <td class="rank"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    function updateRanking() {
+        let table = document.getElementById("ratingTable");
+        let rows = Array.from(table.getElementsByTagName("tr")).slice(1); // Все строки, кроме заголовка
+        rows.sort((a, b) => parseInt(b.querySelector(".score").innerText) - parseInt(a.querySelector(".score").innerText));
+
+        rows.forEach((row, index) => {
+            row.querySelector(".rank").innerText = index + 1; // Присваиваем рейтинг
+        });
+
+        rows.forEach(row => table.appendChild(row)); // Переставляем строки
+    }
+
+    updateRanking(); // Обновляем рейтинг при загрузке страницы
+</script>
+
+</body>
+</html>
